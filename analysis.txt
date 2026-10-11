@@ -1,0 +1,72 @@
+SORTING FIXED-LENGTH SOCIAL MEDIA IDS
+=====================================
+
+PROBLEM STATEMENT
+Sort the IDs 324, 125, 456, 218, 102, 389, 275, 147 using Merge Sort and Quick Sort. Record execution steps and compare operations, complexity, and additional space.
+
+A. MERGE SORT TRACE
+-------------------
+Initial:
+324, 125, 456, 218, 102, 389, 275, 147
+
+Pass 1 - sort adjacent pairs:
+125, 324, 218, 456, 102, 389, 147, 275
+
+Pass 2 - merge groups of four:
+125, 218, 324, 456, 102, 147, 275, 389
+
+Pass 3 - merge the two sorted halves:
+102, 125, 147, 218, 275, 324, 389, 456
+
+For this implementation and input, the merge stages use 17 element comparisons.
+
+B. QUICK SORT TRACE
+-------------------
+Implementation detail: the last element of each subarray is the pivot, and Lomuto partitioning is used.
+
+Initial:
+324, 125, 456, 218, 102, 389, 275, 147
+
+Partition 1, pivot 147:
+125, 102, 147, 218, 324, 389, 275, 456
+
+Partition 2, pivot 102, on left subarray:
+102, 125, 147, 218, 324, 389, 275, 456
+
+Partition 3, pivot 456, on right subarray:
+102, 125, 147, 218, 324, 389, 275, 456
+
+Partition 4, pivot 275, on its subarray:
+102, 125, 147, 218, 275, 389, 324, 456
+
+Partition 5, pivot 324, on remaining subarray:
+102, 125, 147, 218, 275, 324, 389, 456
+
+Final sorted sequence:
+102, 125, 147, 218, 275, 324, 389, 456
+
+For the stated Lomuto implementation and input, there are 15 element-to-pivot comparisons and 5 non-trivial partition calls.
+
+C. COMPARISON
+-------------
+Merge Sort:
+- Best time: O(n log n)
+- Average time: O(n log n)
+- Worst time: O(n log n)
+- Additional space: O(n)
+- Stable: Yes
+
+Quick Sort:
+- Best time: O(n log n)
+- Average time: O(n log n)
+- Worst time: O(n^2)
+- Additional space: O(log n) average recursion space; O(n) worst case
+- Stable: Usually no
+
+CONCLUSION
+----------
+Merge Sort is appropriate when guaranteed O(n log n) time and stability are important. Quick Sort is often fast in practice and generally uses less auxiliary memory, but poor pivot choices can lead to O(n^2) time. For fixed-length numeric IDs when sorting by digit positions is specifically desired, Radix Sort is another suitable option.
+
+NOTE
+----
+The phrase "after each digit position is processed" describes Radix Sort, not Merge Sort. The Merge Sort trace above records merging passes. Quick Sort's exact intermediate arrangement depends on the partition implementation; the trace above matches the last-element-pivot Lomuto code included in quick_sort.c.
